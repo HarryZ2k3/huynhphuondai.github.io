@@ -1,20 +1,20 @@
 {
-  "name": "harry-huynh-portfolio",
+  "name": "harry-huynh-personal-site",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
+    "dev": "vinext dev --host 0.0.0.0 --port 5173",
     "build": "vinext build",
-    "start": "vinext start",
+    "host": "vinext start --host 0.0.0.0 --port 5173",
+    "preview": "vinext start --host 127.0.0.1 --port 5173",
+    "start": "vinext start --host 0.0.0.0 --port 5173",
     "test": "vinext build && node --test tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "lint": "eslint app tests worker vite.config.ts next.config.ts eslint.config.mjs"
   },
   "dependencies": {
-    "drizzle-orm": "0.45.2",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
@@ -28,7 +28,6 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
     "@vitejs/plugin-rsc": "0.5.26",
-    "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",

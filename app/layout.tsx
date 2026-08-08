@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Harry Huynh | Information Technology Engineer",
+  title: "Harry Huynh | Personal Website",
   description:
-    "Professional portfolio for Harry Huynh, an Information Technology Engineer focused on reliable systems and practical support.",
+    "Personal website and portfolio for Harry Huynh, an Information Technology Engineer sharing work, writing, and personal moments.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

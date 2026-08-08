@@ -25,38 +25,40 @@ async function render() {
   );
 }
 
-test("server-renders the IT engineer portfolio", async () => {
+test("server-renders the local-first personal website", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Harry Huynh \| Information Technology Engineer<\/title>/i);
-  assert.match(html, /Information Technology Engineer/);
-  assert.match(html, /Reliable systems, clear support/);
+  assert.match(html, /<title>Harry Huynh \| Personal Website<\/title>/i);
+  assert.match(html, /Photo Gallery/);
+  assert.match(html, /Notes I Want to Build Into Essays/);
+  assert.match(html, /Local-first, no sign-in gate/);
   assert.match(html, /phuongdai\.saigon@gmail\.com/);
-  assert.doesNotMatch(html, /Codex/);
-  assert.doesNotMatch(html, /react-loading-skeleton|codex-preview|SkeletonPreview/);
+  assert.doesNotMatch(html, /signin-with-chatgpt|signout-with-chatgpt|Codex/);
 });
 
-test("keeps the finished portfolio free of starter preview assets", async () => {
-  const [css, page, layout, packageJson] = await Promise.all([
+test("keeps the project local-first and free of external auth wiring", async () => {
+  const [css, page, layout, packageJson, viteConfig] = await Promise.all([
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /Harry Huynh/);
-  assert.match(page, /Information Technology Engineer/);
-  assert.match(layout, /Harry Huynh \| Information Technology Engineer/);
-  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  assert.doesNotMatch(page, /codex-preview|_sites-preview|SkeletonPreview/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(
-    css,
-    /react-loading-skeleton|sites-skeleton|generated_images|it-workspace-hero/i,
-  );
+  assert.match(page, /MotionController/);
+  assert.match(page, /galleryItems/);
+  assert.match(page, /blogPosts/);
+  assert.match(layout, /Harry Huynh \| Personal Website/);
+  assert.match(packageJson, /"host": "vinext start --host 0\.0\.0\.0 --port 5173"/);
+  assert.match(css, /@view-transition/);
+  assert.match(css, /scroll-behavior:\s*smooth/);
+  assert.doesNotMatch(page, /generated_images|it-workspace-hero|SkeletonPreview/);
+  assert.doesNotMatch(viteConfig, /\.openai|sites-vite-plugin|hosting\.json/);
 
-  await assert.rejects(access(new URL("app/_sites-preview", templateRoot)));
+  await assert.rejects(access(new URL("app/chatgpt-auth.ts", templateRoot)));
+  await assert.rejects(access(new URL(".openai/hosting.json", templateRoot)));
+  await assert.rejects(access(new URL("build/sites-vite-plugin.ts", templateRoot)));
 });
