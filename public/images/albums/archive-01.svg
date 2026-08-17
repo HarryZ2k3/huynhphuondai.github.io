@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Learning archive placeholder</title>
+  <desc id="desc">Abstract archive and notes placeholder for a future real photograph.</desc>
+  <rect width="1600" height="1100" fill="#111c20"/>
+  <rect x="160" y="200" width="1280" height="700" rx="8" fill="#fffdfa"/>
+  <rect x="250" y="310" width="360" height="460" rx="8" fill="#dfe8e4"/>
+  <rect x="700" y="310" width="650" height="460" rx="8" fill="#eef3f1"/>
+  <path d="M790 420h380M790 535h280M790 650h430" stroke="#365b6d" stroke-width="26" stroke-linecap="round"/>
+  <path d="M320 445l110 110 110-170" fill="none" stroke="#0f766e" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M250 805h1100" stroke="#a55739" stroke-width="30"/>
+</svg>

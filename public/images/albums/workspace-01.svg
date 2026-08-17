@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Workspace placeholder</title>
+  <desc id="desc">Abstract desk setup placeholder for a future real photograph.</desc>
+  <rect width="1600" height="1100" fill="#f6f3ec"/>
+  <rect x="170" y="220" width="760" height="500" rx="8" fill="#111c20"/>
+  <rect x="220" y="270" width="660" height="400" fill="#dfe8e4"/>
+  <rect x="1010" y="260" width="330" height="470" rx="8" fill="#fffdfa" stroke="#111c20" stroke-width="12"/>
+  <path d="M1080 370h190M1080 465h160M1080 560h205" stroke="#365b6d" stroke-width="26" stroke-linecap="round"/>
+  <rect x="110" y="820" width="1380" height="74" fill="#a55739"/>
+  <rect x="510" y="720" width="90" height="100" fill="#365b6d"/>
+  <rect x="425" y="812" width="260" height="28" fill="#365b6d"/>
+</svg>

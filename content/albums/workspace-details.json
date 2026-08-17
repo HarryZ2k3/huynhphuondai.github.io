@@ -1,0 +1,26 @@
+{
+  "title": "Workspace Details",
+  "slug": "workspace-details",
+  "description": "A personal album for desk setup, notebooks, repair moments, and tools you actually use.",
+  "date": "2026-08-12",
+  "location": "Personal workspace",
+  "coverImage": "/images/albums/workspace-01.svg",
+  "story": "Portfolio sites often hide the working process. This album is meant for the small honest details: notes, cables, checklists, lab machines, and the places where projects become real.",
+  "camera": "Add your real camera details later.",
+  "photos": [
+    {
+      "src": "/images/albums/workspace-01.svg",
+      "alt": "Abstract placeholder for a workspace photo",
+      "caption": "Desk notes and setup references",
+      "width": 1600,
+      "height": 1100
+    },
+    {
+      "src": "/images/albums/workspace-02.svg",
+      "alt": "Abstract placeholder for a tools photo",
+      "caption": "Small tools, repeatable routines",
+      "width": 1600,
+      "height": 1100
+    }
+  ]
+}

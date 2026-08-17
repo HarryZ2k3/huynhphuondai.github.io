@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Endpoint playbook placeholder</title>
+  <desc id="desc">Abstract laptop and checklist visual for endpoint lifecycle work.</desc>
+  <rect width="1600" height="1000" fill="#eef3f1"/>
+  <rect x="150" y="120" width="1300" height="760" rx="8" fill="#fffdfa" stroke="#111c20" stroke-width="8"/>
+  <rect x="260" y="240" width="620" height="390" rx="8" fill="#111c20"/>
+  <rect x="300" y="280" width="540" height="310" fill="#dfe8e4"/>
+  <path d="M205 720h730l70 90H130z" fill="#365b6d"/>
+  <rect x="1010" y="245" width="340" height="470" rx="8" fill="#f8fbfa" stroke="#d8e0dd" stroke-width="8"/>
+  <path d="M1080 352l35 35 72-84M1080 482l35 35 72-84M1080 612l35 35 72-84" fill="none" stroke="#0f766e" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1220 354h75M1220 484h95M1220 614h64" stroke="#111c20" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="570" cy="435" r="68" fill="#a55739"/>
+</svg>

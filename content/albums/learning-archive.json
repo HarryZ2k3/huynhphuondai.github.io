@@ -1,0 +1,25 @@
+{
+  "title": "Learning Archive",
+  "slug": "learning-archive",
+  "description": "A flexible album for screenshots, lab photos, certification notes, and study memories.",
+  "date": "2026-07-30",
+  "location": "Personal archive",
+  "coverImage": "/images/albums/archive-01.svg",
+  "story": "This album is for the quieter side of professional growth. Add the photos that show what you are learning and how your taste is developing over time.",
+  "photos": [
+    {
+      "src": "/images/albums/archive-01.svg",
+      "alt": "Abstract placeholder for a study archive photo",
+      "caption": "Reference notes and experiments",
+      "width": 1600,
+      "height": 1100
+    },
+    {
+      "src": "/images/albums/archive-02.svg",
+      "alt": "Abstract placeholder for a lab archive photo",
+      "caption": "Small lab, useful memory",
+      "width": 1600,
+      "height": 1100
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Evening street placeholder</title>
+  <desc id="desc">Abstract night street placeholder for a future real photograph.</desc>
+  <rect width="1600" height="1100" fill="#111c20"/>
+  <circle cx="1230" cy="220" r="80" fill="#b78518"/>
+  <path d="M160 780h1280M300 780V390h220v390M650 780V250h300v530M1080 780V450h210v330" stroke="#d8e0dd" stroke-width="28" stroke-linejoin="round" fill="none"/>
+  <path d="M345 485h120M345 595h120M705 350h190M705 470h190M1130 535h110" stroke="#a55739" stroke-width="26" stroke-linecap="round"/>
+  <path d="M0 900h1600" stroke="#0f766e" stroke-width="52"/>
+</svg>

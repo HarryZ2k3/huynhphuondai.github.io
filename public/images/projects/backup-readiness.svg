@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Backup readiness placeholder</title>
+  <desc id="desc">Abstract storage and restore checklist visual.</desc>
+  <rect width="1600" height="1000" fill="#f8fbfa"/>
+  <rect x="140" y="130" width="1320" height="740" rx="8" fill="#fffdfa" stroke="#111c20" stroke-width="8"/>
+  <rect x="240" y="250" width="410" height="500" rx="8" fill="#365b6d"/>
+  <rect x="710" y="250" width="650" height="500" rx="8" fill="#eef3f1" stroke="#d8e0dd" stroke-width="6"/>
+  <path d="M330 360h230M330 450h230M330 540h230M330 630h170" stroke="#fffdfa" stroke-width="22" stroke-linecap="round"/>
+  <path d="M815 374l52 52 108-122M815 504l52 52 108-122M815 634l52 52 108-122" fill="none" stroke="#0f766e" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1040 375h205M1040 505h175M1040 635h235" stroke="#111c20" stroke-width="20" stroke-linecap="round"/>
+  <path d="M445 250v-58c0-48 39-87 87-87h324c48 0 87 39 87 87v58" fill="none" stroke="#a55739" stroke-width="20"/>
+</svg>

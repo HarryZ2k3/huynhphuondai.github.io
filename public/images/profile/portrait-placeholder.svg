@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Portrait placeholder</title>
+  <desc id="desc">A clean placeholder frame for Harry Huynh's future portrait photo.</desc>
+  <rect width="900" height="1100" fill="#111c20"/>
+  <rect x="48" y="48" width="804" height="1004" fill="#f6f3ec"/>
+  <rect x="96" y="96" width="708" height="908" fill="#dfe8e4"/>
+  <path d="M96 736c120-72 232-94 336-66 88 24 162 19 224-15 54-30 104-34 148-12v361H96z" fill="#365b6d"/>
+  <circle cx="450" cy="390" r="146" fill="#0f766e"/>
+  <path d="M308 586c43-71 91-107 142-107s99 36 142 107v69H308z" fill="#a55739"/>
+  <path d="M190 180h520M190 920h520" stroke="#111c20" stroke-width="10" stroke-linecap="round"/>
+</svg>

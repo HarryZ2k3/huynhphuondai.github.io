@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Harry Huynh Writing</title>
+  <link>https://harryz2k3.github.io/Personal-Porfolio</link>
+  <description>Practical notes, field reflections, and personal writing.</description>
+  <item>
+    <title>A Practical Troubleshooting Checklist</title>
+    <link>https://harryz2k3.github.io/Personal-Porfolio/writing/practical-troubleshooting-checklist/</link>
+    <guid>https://harryz2k3.github.io/Personal-Porfolio/writing/practical-troubleshooting-checklist/</guid>
+    <pubDate>Mon, 17 Aug 2026 00:00:00 GMT</pubDate>
+    <description>A calm sequence I like using before jumping into complex fixes.</description>
+  </item>
+  <item>
+    <title>A Backup Plan Is Useful Only If Restore Works</title>
+    <link>https://harryz2k3.github.io/Personal-Porfolio/writing/backup-plan-useful/</link>
+    <guid>https://harryz2k3.github.io/Personal-Porfolio/writing/backup-plan-useful/</guid>
+    <pubDate>Mon, 10 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Notes on treating restore testing as the real measurement of backup health.</description>
+  </item>
+  <item>
+    <title>Calm Technology Is A Professional Skill</title>
+    <link>https://harryz2k3.github.io/Personal-Porfolio/writing/calm-technology/</link>
+    <guid>https://harryz2k3.github.io/Personal-Porfolio/writing/calm-technology/</guid>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Why the emotional texture of a technical fix matters as much as the command that solves it.</description>
+  </item>
+</channel>
+</rss>

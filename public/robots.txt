@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://harryz2k3.github.io/Personal-Porfolio/sitemap.xml

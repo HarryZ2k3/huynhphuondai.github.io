@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Tools placeholder</title>
+  <desc id="desc">Abstract tools and notebook placeholder for a future real photograph.</desc>
+  <rect width="1600" height="1100" fill="#eef3f1"/>
+  <rect x="190" y="190" width="490" height="720" rx="8" fill="#fffdfa" stroke="#111c20" stroke-width="10"/>
+  <path d="M290 340h280M290 455h220M290 570h270M290 685h180" stroke="#365b6d" stroke-width="24" stroke-linecap="round"/>
+  <path d="M870 260l340 340M1180 290l-340 340" stroke="#a55739" stroke-width="40" stroke-linecap="round"/>
+  <rect x="855" y="695" width="410" height="92" rx="8" fill="#0f766e"/>
+  <circle cx="1260" cy="330" r="86" fill="#b78518"/>
+</svg>

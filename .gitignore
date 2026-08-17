@@ -31,6 +31,10 @@ yarn-error.log*
 dev-server.log
 dev-server.err.log
 dev-server.pid
+site-server.log
+site-server.err.log
+site-server.pid
+*.tsbuildinfo
 
 # env files (can opt-in for committing if needed)
 .env*

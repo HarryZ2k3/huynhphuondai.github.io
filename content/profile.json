@@ -1,0 +1,83 @@
+{
+  "name": "Harry Huynh",
+  "title": "Information Technology Engineer",
+  "location": "Ho Chi Minh City, Vietnam",
+  "email": "hello@harryhuynh.dev",
+  "portraitImage": "/images/profile/portrait-placeholder.svg",
+  "currentFocus": "Endpoint reliability, practical automation, backup readiness, and clear technical documentation",
+  "hero": {
+    "headline": "I build dependable IT systems and keep the useful details written down.",
+    "summary": "I am Harry Huynh, an Information Technology Engineer focused on practical infrastructure, troubleshooting, documentation, and the calm operational habits that help people work without technical friction."
+  },
+  "biography": [
+    "My work sits close to the everyday places where technology either helps or gets in the way: laptops, networks, identity, backup routines, cloud tools, and the small operational decisions that make a team feel supported.",
+    "I like systems that are understandable. A good fix should not only solve today's issue; it should leave behind notes, checks, and handoff details that make tomorrow easier.",
+    "Outside the technical work, this site is also a personal archive for writing and photography. The goal is to show the person behind the engineering without turning the portfolio into a sales page."
+  ],
+  "interests": [
+    "Reliable endpoint setups",
+    "Small-business infrastructure",
+    "Troubleshooting checklists",
+    "Documentation habits",
+    "Photography walks",
+    "Personal knowledge systems"
+  ],
+  "tools": [
+    "Windows",
+    "Linux",
+    "PowerShell",
+    "Bash",
+    "Microsoft 365",
+    "Google Workspace",
+    "Networking",
+    "Backups",
+    "Git",
+    "Markdown",
+    "Next.js",
+    "Static hosting"
+  ],
+  "principles": [
+    "Make the system easy to understand before making it clever.",
+    "Document the decision, not just the command that happened to work.",
+    "Prefer boring reliability for anything people depend on daily.",
+    "Keep personal work honest: real projects, real photos, real notes."
+  ],
+  "experience": [
+    {
+      "company": "Personal IT Engineering Practice",
+      "role": "Information Technology Engineer",
+      "dates": "Current",
+      "location": "Ho Chi Minh City",
+      "summary": "Hands-on infrastructure and support work across endpoint setup, network hygiene, backup planning, automation, and technical documentation.",
+      "achievements": [
+        "Built repeatable setup notes for common workstation and account onboarding tasks.",
+        "Organized backup and recovery checks into lightweight routines that can be reviewed without a dedicated admin panel.",
+        "Created this website as a static, Git-backed personal archive for work, writing, and photography."
+      ],
+      "technologies": ["Windows", "Linux", "PowerShell", "Git", "Markdown"]
+    },
+    {
+      "company": "Personal Lab",
+      "role": "Systems Learner and Builder",
+      "dates": "Ongoing",
+      "location": "Local machine and home network",
+      "summary": "A practical lab for testing deployment flows, local hosting, networking notes, and small automations before using them in public-facing work.",
+      "achievements": [
+        "Uses the Git repository as the source of truth for publishing content.",
+        "Keeps hosting simple enough to run from this computer or export to static hosting later.",
+        "Treats documentation as part of the finished project, not an afterthought."
+      ],
+      "technologies": ["Next.js", "Node.js", "Static export", "Local networking"]
+    }
+  ],
+  "socials": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/HarryZ2k3"
+    },
+    {
+      "label": "Email",
+      "href": "mailto:hello@harryhuynh.dev"
+    }
+  ]
+}

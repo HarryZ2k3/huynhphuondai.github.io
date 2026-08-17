@@ -1,9 +1,9 @@
-# Gallery Photos
+# Legacy Gallery Folder
 
-Add personal photos to this folder and reference them from the gallery data in
-`app/page.tsx`.
+The active photo system now reads album data from `content/albums/*.json` and
+image files from `public/images/albums/`.
 
-Good filenames:
+Recommended filenames:
 
 - `workspace.jpg`
 - `saigon-walk.webp`

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Lab archive placeholder</title>
+  <desc id="desc">Abstract lab machine placeholder for a future real photograph.</desc>
+  <rect width="1600" height="1100" fill="#f8fbfa"/>
+  <rect x="180" y="180" width="1240" height="740" rx="8" fill="#111c20"/>
+  <rect x="260" y="260" width="510" height="520" fill="#dfe8e4"/>
+  <rect x="860" y="260" width="430" height="520" fill="#365b6d"/>
+  <path d="M335 390h280M335 510h225M335 630h310" stroke="#0f766e" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="1075" cy="520" r="112" fill="#b78518"/>
+  <path d="M1075 408v224M963 520h224" stroke="#111c20" stroke-width="24" stroke-linecap="round"/>
+</svg>
