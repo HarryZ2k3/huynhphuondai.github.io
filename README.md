@@ -54,9 +54,58 @@ Local hosting does not require any external service:
 pnpm run host
 ```
 
-This repo also includes `.github/workflows/pages.yml`. If you later enable GitHub Pages and push to `main`, the workflow
-builds the same static site and publishes the `out/` folder. For a project repository, it automatically sets the base path
-to the repository name.
+## Safe Public Hosting With GitHub Pages
+
+The safest public option for this site is GitHub Pages because the site exports to plain static files. Visitors receive
+HTML, CSS, JavaScript, and images only. Your computer does not need to be exposed to the internet, and there is no login
+or backend admin area to secure.
+
+### One-Time GitHub Setup
+
+1. Push this repository to GitHub.
+2. Open the repository on GitHub.
+3. Go to `Settings` -> `Pages`.
+4. Under `Build and deployment`, set `Source` to `GitHub Actions`.
+5. Save the setting if GitHub asks you to.
+
+This repo already includes `.github/workflows/pages.yml`. After GitHub Pages is set to GitHub Actions, every push to
+`main` runs validation, builds the static site, uploads `out/`, and publishes it.
+
+For this repository, the public URL should be:
+
+```text
+https://harryz2k3.github.io/Personal-Porfolio/
+```
+
+### Publishing Updates
+
+Edit content files, then run:
+
+```powershell
+pnpm run lint
+pnpm run typecheck
+pnpm run audit-images
+pnpm run build
+pnpm run test
+```
+
+Commit and push:
+
+```powershell
+git add .
+git commit -m "Update personal site"
+git push origin main
+```
+
+GitHub Actions will publish the update. Check the `Actions` tab if the site does not update after a few minutes.
+
+### Safety Notes
+
+- Do not put private keys, passwords, private addresses, or private client details in `content/` or `public/`.
+- Keep personal photos intentional. Anything in `public/images/` can become visible online.
+- Prefer GitHub Pages over router port forwarding. Port forwarding exposes your computer; GitHub Pages only serves the
+  static website.
+- If you add a custom domain later, configure it in GitHub Pages settings and keep HTTPS enabled.
 
 ## Validation
 
