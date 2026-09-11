@@ -1,12 +1,11 @@
 {
   "title": "Saigon Field Notes",
   "slug": "saigon-field-notes",
-  "description": "A starter album for street walks, workday details, and small visual observations.",
+  "description": "City walks, familiar streets, and small observations.",
   "date": "2026-08-17",
   "location": "Ho Chi Minh City",
   "coverImage": "/images/albums/saigon-01.svg",
-  "story": "Use this album as a place for real city photographs. The current visuals are lightweight placeholders so the page has structure without pretending to be your photography.",
-  "camera": "Replace this with your camera or phone model when you add real photos.",
+  "story": "City walks, familiar streets, and small observations. This preview collection uses illustrations while the photographs are being gathered.",
   "photos": [
     {
       "src": "/images/albums/saigon-01.svg",
@@ -22,5 +21,6 @@
       "width": 1600,
       "height": 1100
     }
-  ]
+  ],
+  "sample": true
 }

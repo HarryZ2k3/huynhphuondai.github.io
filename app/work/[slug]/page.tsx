@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MarkdownArticle } from "@/components/MarkdownArticle";
 import { getProject, getProjects } from "@/lib/content";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { absoluteUrl, assetPath } from "@/lib/site";
 
 type PageProps = {
@@ -22,14 +23,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: project.title,
     description: project.description,
     alternates: {
-      canonical: absoluteUrl(`/work/${project.slug}`),
+      canonical: absoluteUrl(`/work/${project.slug}/`),
     },
     openGraph: {
       title: project.title,
       description: project.description,
       type: "article",
       url: absoluteUrl(`/work/${project.slug}`),
-      images: [assetPath(project.coverImage)],
+      ...(project.coverImage ? { images: [assetPath(project.coverImage)] } : {}),
     },
   };
 }
@@ -44,14 +45,15 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <>
-      <section className="detail-hero section-shell reveal">
+      <section className="detail-hero section-shell">
         <Link className="breadcrumb" href="/work">
-          Work
+          <ArrowLeft size={15} aria-hidden="true" /> All work
         </Link>
         <p className="section-kicker">
-          {project.year} · {project.role}
+          {project.kind ?? "Project"} / {project.period ?? project.year} / {project.role}
         </p>
         <h1>{project.title}</h1>
+        {project.organization ? <p className="project-organization">{project.organization}</p> : null}
         <p>{project.description}</p>
       </section>
 
@@ -67,7 +69,7 @@ export default async function ProjectPage({ params }: PageProps) {
               <dd>{project.approach}</dd>
             </div>
             <div>
-              <dt>Outcome</dt>
+              <dt>{project.kind === "Concept study" ? "Intended outcome" : "Outcome"}</dt>
               <dd>{project.outcome}</dd>
             </div>
           </dl>
@@ -78,16 +80,20 @@ export default async function ProjectPage({ params }: PageProps) {
           </ul>
         </aside>
 
-        <div className="detail-main reveal">
-          <img className="detail-cover" src={assetPath(project.coverImage)} alt="" />
+        <div className="detail-main">
+          {project.coverImage ? <img className="detail-cover" src={assetPath(project.coverImage)} alt="" /> : null}
+          <div className="inline-links">
+            {project.repository ? <a className="text-link" href={project.repository} target="_blank" rel="noreferrer">View repository <ArrowUpRight size={16} aria-hidden="true" /></a> : null}
+            {project.demo ? <a className="text-link" href={project.demo} target="_blank" rel="noreferrer">View project <ArrowUpRight size={16} aria-hidden="true" /></a> : null}
+          </div>
           <MarkdownArticle markdown={project.content} />
           <section className="lesson-note">
             <p className="section-kicker">Lesson</p>
             <p>{project.lessons}</p>
           </section>
-          {project.screenshots.length > 0 ? (
+          {project.screenshots.filter((image) => image !== project.coverImage).length > 0 ? (
             <div className="screenshot-grid">
-              {project.screenshots.map((screenshot) => (
+              {project.screenshots.filter((image) => image !== project.coverImage).map((screenshot) => (
                 <img src={assetPath(screenshot)} alt="" key={screenshot} loading="lazy" />
               ))}
             </div>

@@ -18,13 +18,14 @@ if (fs.existsSync(filePath)) {
 }
 
 const source = `---
-title: ${title}
+title: ${JSON.stringify(title)}
 description: One clear sentence about this post.
-date: ${date}
-updated: ${date}
+date: "${date}"
+updated: "${date}"
 tags: [Notes]
 category: Field Notes
-draft: false
+section: Journal
+draft: true
 featured: false
 ---
 

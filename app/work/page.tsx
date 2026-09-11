@@ -1,48 +1,34 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getProjects } from "@/lib/content";
-import { assetPath } from "@/lib/site";
+import { ProjectCard } from "@/components/ProjectCard";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Selected IT engineering projects and case studies from Harry Huynh.",
+  description: "Research, software development, and academic projects by Harry Huynh.",
+  alternates: { canonical: absoluteUrl("/work/") },
 };
 
 export default function WorkPage() {
   const projects = getProjects();
-
+  const experience = projects.filter((project) => project.kind !== "Concept study");
+  const concepts = projects.filter((project) => project.kind === "Concept study");
   return (
     <>
-      <section className="page-hero section-shell reveal">
+      <section className="page-hero section-shell">
         <p className="section-kicker">Work</p>
-        <h1>Projects with practical infrastructure, clear notes, and maintainable handoffs.</h1>
-        <p>
-          A file-backed collection of IT engineering case studies. Replace these starters with your real project
-          stories as your portfolio grows.
-        </p>
+        <h1>Research into practice.</h1>
+        <p>Full-stack development, logic-based AI, and database work. A closer look at my contributions, from an R&amp;D internship to university team projects.</p>
       </section>
-
-      <section className="section-shell section-block">
-        <div className="project-index">
-          {projects.map((project) => (
-            <Link className="project-card reveal" href={`/work/${project.slug}`} key={project.slug}>
-              <img src={assetPath(project.coverImage)} alt="" loading="lazy" />
-              <div>
-                <span>
-                  {project.year} · {project.role}
-                </span>
-                <h2>{project.title}</h2>
-                <p>{project.description}</p>
-                <ul className="tag-list" aria-label={`${project.title} technologies`}>
-                  {project.technologies.slice(0, 5).map((technology) => (
-                    <li key={technology}>{technology}</li>
-                  ))}
-                </ul>
-              </div>
-            </Link>
-          ))}
-        </div>
+      <section className="section-shell section-block ruled-section" aria-label="Experience and academic projects">
+        <div className="index-heading"><h2>Experience &amp; academic projects</h2><span>{experience.length} entries</span></div>
+        <div className="project-grid">{experience.map((project) => <ProjectCard project={project} key={project.slug} />)}</div>
       </section>
+      {concepts.length ? <section className="section-shell section-block ruled-section" aria-label="Concept studies">
+        <div className="index-heading"><h2>Concept studies</h2><span>{concepts.length} entries</span></div>
+        <p className="collection-note">Exploratory ideas in IT operations, separate from completed work.</p>
+        <div className="project-grid">{concepts.map((project) => <ProjectCard project={project} key={project.slug} />)}</div>
+      </section> : null}
     </>
   );
 }

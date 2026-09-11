@@ -46,3 +46,5 @@ site-server.pid
 /.wrangler/
 /outputs/
 /work/
+.studio/
+studio/dist/

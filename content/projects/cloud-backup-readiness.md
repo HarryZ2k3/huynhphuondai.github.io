@@ -1,16 +1,17 @@
 ---
-title: Cloud Backup Readiness Checklist
-year: 2026
-role: IT Operations
-description: A checklist-driven backup review that focuses on restore confidence, not just whether a sync client is installed.
+title: "Cloud Backup Readiness Checklist"
+kind: "Concept study"
+year: "2026"
+role: "IT Operations"
+description: "A checklist-driven backup review that focuses on restore confidence, not just whether a sync client is installed."
 technologies: [Backups, Cloud storage, Recovery planning, Documentation]
-coverImage: /images/projects/backup-readiness.svg
+coverImage: "/images/projects/backup-readiness.svg"
 screenshots: [/images/projects/backup-readiness.svg]
-featured: true
-challenge: Backups look complete until someone needs to restore a specific file, folder, or account.
-approach: Define what must be recoverable, document where it lives, and rehearse a small restore path.
-outcome: A calmer backup posture with visible gaps and simple owner-friendly next steps.
-lessons: A backup plan is only real when someone has tested the restore path.
+featured: false
+challenge: "Backups look complete until someone needs to restore a specific file, folder, or account."
+approach: "Define what must be recoverable, document where it lives, and rehearse a small restore path."
+outcome: "A calmer backup posture with visible gaps and simple owner-friendly next steps."
+lessons: "A backup plan is only real when someone has tested the restore path."
 ---
 
 ## The Shape Of The Work

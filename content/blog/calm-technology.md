@@ -1,10 +1,11 @@
 ---
-title: Calm Technology Is A Professional Skill
-description: Why the emotional texture of a technical fix matters as much as the command that solves it.
-date: 2026-07-28
-updated: 2026-07-28
+title: "Calm Technology Is A Professional Skill"
+description: "Why the emotional texture of a technical fix matters as much as the command that solves it."
+date: "2026-07-28"
+updated: "2026-07-28"
 tags: [Support, Documentation, Personal]
-category: Essay
+category: "Essay"
+section: "Essays"
 draft: false
 featured: false
 ---

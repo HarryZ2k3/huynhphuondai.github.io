@@ -2,72 +2,137 @@
   "name": "Harry Huynh",
   "title": "Information Technology Engineer",
   "location": "Ho Chi Minh City, Vietnam",
-  "email": "hello@harryhuynh.dev",
-  "portraitImage": "/images/profile/portrait-placeholder.svg",
-  "currentFocus": "Endpoint reliability, practical automation, backup readiness, and clear technical documentation",
+  "email": "phuongdai.saigon@gmail.com",
+  "portraitImage": "/images/profile/harry-huynh.jpg",
+  "currentFocus": "Full-stack development, logic-based AI, and technical communication.",
   "hero": {
-    "headline": "I build dependable IT systems and keep the useful details written down.",
-    "summary": "I am Harry Huynh, an Information Technology Engineer focused on practical infrastructure, troubleshooting, documentation, and the calm operational habits that help people work without technical friction."
+    "headline": "Building software. Making ideas clear.",
+    "summary": "I'm an IT student and developer in Ho Chi Minh City, with experience in Python and Prolog research, full-stack applications, and technical writing."
   },
   "biography": [
-    "My work sits close to the everyday places where technology either helps or gets in the way: laptops, networks, identity, backup routines, cloud tools, and the small operational decisions that make a team feel supported.",
-    "I like systems that are understandable. A good fix should not only solve today's issue; it should leave behind notes, checks, and handoff details that make tomorrow easier.",
-    "Outside the technical work, this site is also a personal archive for writing and photography. The goal is to show the person behind the engineering without turning the portfolio into a sales page."
+    "I'm Huynh Phuong Dai, also known as Harry Huynh. My background brings together software development, research, and teaching. I enjoy getting to know an unfamiliar system, building something useful with it, and making the work understandable to others.",
+    "During my R&D internship at Titan Technology Corporation, I worked with Python, Prolog, and the Popper inductive logic programming library. My contributions included a command-line interface, a React and Flask application, development tools, documentation, and CI/CD workflows with unit tests.",
+    "At university, I led a nine-person team building a student-records web application and worked on database design and technical documentation. Alongside my studies, teaching English and robotics has helped me explain complicated ideas in a way people can use."
   ],
   "interests": [
-    "Reliable endpoint setups",
-    "Small-business infrastructure",
-    "Troubleshooting checklists",
-    "Documentation habits",
-    "Photography walks",
-    "Personal knowledge systems"
+    "Improvisation and acting",
+    "History and historical research",
+    "Online communities and gaming",
+    "Teaching and explaining ideas",
+    "Personal writing",
+    "Exploring unfamiliar topics"
   ],
   "tools": [
-    "Windows",
-    "Linux",
-    "PowerShell",
-    "Bash",
-    "Microsoft 365",
-    "Google Workspace",
-    "Networking",
-    "Backups",
-    "Git",
-    "Markdown",
-    "Next.js",
-    "Static hosting"
+    "Python",
+    "Prolog",
+    "React",
+    "Flask",
+    "JavaScript",
+    "HTML5",
+    "SQL / Microsoft SQL Server",
+    "Java",
+    "C / C++",
+    "MongoDB",
+    "Power BI",
+    "Git / GitLab",
+    "CI/CD and unit testing",
+    "NetBeans"
   ],
   "principles": [
-    "Make the system easy to understand before making it clever.",
-    "Document the decision, not just the command that happened to work.",
-    "Prefer boring reliability for anything people depend on daily.",
-    "Keep personal work honest: real projects, real photos, real notes."
+    "Make complicated ideas understandable.",
+    "Leave useful documentation for the next person.",
+    "Keep learning through practical work.",
+    "Communicate clearly, especially when working as a team."
   ],
   "experience": [
     {
-      "company": "Personal IT Engineering Practice",
-      "role": "Information Technology Engineer",
-      "dates": "Current",
-      "location": "Ho Chi Minh City",
-      "summary": "Hands-on infrastructure and support work across endpoint setup, network hygiene, backup planning, automation, and technical documentation.",
+      "company": "Titan Technology Corporation",
+      "role": "R&D Intern",
+      "dates": "Jul 2025 - Sep 2025",
+      "location": "Internship",
+      "summary": "Researched and developed a full-stack product using Popper inductive logic programming, Python, and Prolog.",
       "achievements": [
-        "Built repeatable setup notes for common workstation and account onboarding tasks.",
-        "Organized backup and recovery checks into lightweight routines that can be reviewed without a dedicated admin panel.",
-        "Created this website as a static, Git-backed personal archive for work, writing, and photography."
+        "Built a CLI for running ILP from user input and designed a React and Flask interface.",
+        "Investigated the ILP library's architecture and created development tools and technical documentation.",
+        "Managed GitLab merge requests and conflicts, and designed CI/CD workflows with unit tests."
       ],
-      "technologies": ["Windows", "Linux", "PowerShell", "Git", "Markdown"]
+      "technologies": [
+        "Python",
+        "Prolog",
+        "React",
+        "Flask",
+        "GitLab",
+        "CI/CD"
+      ]
     },
     {
-      "company": "Personal Lab",
-      "role": "Systems Learner and Builder",
-      "dates": "Ongoing",
-      "location": "Local machine and home network",
-      "summary": "A practical lab for testing deployment flows, local hosting, networking notes, and small automations before using them in public-facing work.",
+      "company": "Kyna English",
+      "role": "English Teacher",
+      "dates": "Sep 2025 - Aug 2026",
+      "location": "Teaching",
+      "summary": "Taught academic English to working adults, with more than 300 hours of teaching experience.",
       "achievements": [
-        "Uses the Git repository as the source of truth for publishing content.",
-        "Keeps hosting simple enough to run from this computer or export to static hosting later.",
-        "Treats documentation as part of the finished project, not an afterthought."
+        "Helped learners prepare for IELTS exams.",
+        "Delivered lessons in presentations, public speaking, and improvisation based on learner needs."
       ],
-      "technologies": ["Next.js", "Node.js", "Static export", "Local networking"]
+      "technologies": []
+    },
+    {
+      "company": "International University, VNU-HCM",
+      "role": "Project Manager - Student Records",
+      "dates": "Feb 2024 - Jun 2024",
+      "location": "University project",
+      "summary": "Led a nine-person team through an 11-week web application project for displaying and visualizing academic data.",
+      "achievements": [
+        "Coordinated the project's technical direction, meetings, and documentation.",
+        "Conducted feasibility studies and risk assessments, and worked with stakeholders."
+      ],
+      "technologies": [
+        "Project planning",
+        "Technical documentation",
+        "Data visualization"
+      ]
+    },
+    {
+      "company": "International University, VNU-HCM",
+      "role": "Technical Writer & Database Architect",
+      "dates": "Sep 2023 - Jan 2024",
+      "location": "University project",
+      "summary": "Designed and optimized a database structure while documenting its development.",
+      "achievements": [
+        "Coordinated testing and validation.",
+        "Created technical documents and recorded the development process."
+      ],
+      "technologies": [
+        "C++",
+        "SQL",
+        "NetBeans"
+      ]
+    },
+    {
+      "company": "International University, VNU-HCM",
+      "role": "Research Contributor - Medical AI",
+      "dates": "Started Aug 2019",
+      "location": "Research collaboration",
+      "summary": "Contributed to a multi-university research project on integrating AI into medical processes.",
+      "achievements": [
+        "Collaborated with Thu Duc Hospital's board of medicine as part of the research program."
+      ],
+      "technologies": []
+    },
+    {
+      "company": "Luong The Vinh High School",
+      "role": "Robotics Teaching Assistant",
+      "dates": "Apr 2019 - Dec 2021",
+      "location": "Robotics programming course",
+      "summary": "Helped secondary-school students learn to program LEGO MINDSTORMS robots.",
+      "achievements": [
+        "Contributed to the teaching curriculum.",
+        "Explained programming concepts through practical robotics activities."
+      ],
+      "technologies": [
+        "LEGO MINDSTORMS"
+      ]
     }
   ],
   "socials": [
@@ -76,8 +141,36 @@
       "href": "https://github.com/HarryZ2k3"
     },
     {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/harryphuongdai/"
+    },
+    {
       "label": "Email",
-      "href": "mailto:hello@harryhuynh.dev"
+      "href": "mailto:phuongdai.saigon@gmail.com"
     }
+  ],
+  "fullName": "Huynh Phuong Dai",
+  "personalNote": "I've taught English and robotics, helped organize international gaming communities, and trained in improvisation. Those experiences shape how I communicate, lead, and learn.",
+  "education": [
+    {
+      "institution": "University of the West of England Bristol",
+      "qualification": "Bachelor of Information Technology",
+      "dates": "2025 - 2027",
+      "detail": "Information Technology. Expected graduation: October 2027."
+    },
+    {
+      "institution": "International University, Vietnam National University",
+      "qualification": "Bachelor of Information Technology",
+      "dates": "Expected Oct 2027",
+      "detail": "Information technology systems and data management. Degree in progress."
+    }
+  ],
+  "languages": [
+    "Vietnamese",
+    "English"
+  ],
+  "qualifications": [
+    "IELTS 7.5",
+    "TOEFL iBT 96/120"
   ]
 }

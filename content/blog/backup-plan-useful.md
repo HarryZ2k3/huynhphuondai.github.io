@@ -1,10 +1,11 @@
 ---
-title: A Backup Plan Is Useful Only If Restore Works
-description: Notes on treating restore testing as the real measurement of backup health.
-date: 2026-08-10
-updated: 2026-08-10
+title: "A Backup Plan Is Useful Only If Restore Works"
+description: "Notes on treating restore testing as the real measurement of backup health."
+date: "2026-08-10"
+updated: "2026-08-10"
 tags: [Backups, Reliability, Operations]
-category: Reliability
+category: "Reliability"
+section: "Technical"
 draft: false
 featured: true
 ---

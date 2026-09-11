@@ -1,8 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
 
 const root = process.cwd();
 const missing = [];
+
+const profile = JSON.parse(fs.readFileSync(path.join(root, "content/profile.json"), "utf8"));
+checkAsset(profile.portraitImage, "Profile");
+checkAsset(profile.resumeFile, "Profile");
+for (const post of readMarkdownCollection("content/blog")) checkAsset(post.data.coverImage, post.file);
 
 for (const project of readMarkdownCollection("content/projects")) {
   checkAsset(project.data.coverImage, project.file);
@@ -59,24 +65,11 @@ function readJsonCollection(directory) {
     .map((file) => JSON.parse(fs.readFileSync(path.join(directoryPath, file), "utf8")));
 }
 
-function parseFrontmatter(source) {
-  if (!source.startsWith("---")) return { data: {} };
-  const closing = source.indexOf("\n---", 3);
-  if (closing === -1) return { data: {} };
-  const raw = source.slice(3, closing).trim();
-  const data = {};
-
-  for (const line of raw.split("\n")) {
-    const index = line.indexOf(":");
-    if (index === -1) continue;
-    data[line.slice(0, index).trim()] = line.slice(index + 1).trim().replace(/^["']|["']$/g, "");
-  }
-
-  return { data };
-}
+function parseFrontmatter(source) { return matter(source); }
 
 function parseArray(value) {
   if (!value) return [];
+  if (Array.isArray(value)) return value;
   if (!value.startsWith("[") || !value.endsWith("]")) return [value];
   return value
     .slice(1, -1)

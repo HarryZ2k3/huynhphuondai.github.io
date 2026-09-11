@@ -122,3 +122,20 @@ The build generates:
 - `public/robots.txt`
 - `public/rss.xml`
 - `public/.nojekyll`
+
+## Personalizing the Design
+
+- Add your confirmed biography, email, experience, and tools in `content/profile.json`.
+- Set `resumeFile` to a public path such as `/documents/resume.pdf` only after adding a public-safe PDF. The download link is hidden when this field is absent.
+- Set `portraitImage` to a real image path. The About page hides the starter portrait.
+- Project `kind` distinguishes professional work, personal projects, and concept studies. Existing examples are labelled concept studies.
+- Posts support `section: Technical`, `section: Essays`, or `section: Journal`. New posts start as drafts; set `draft: false` when ready to publish.
+- Albums marked `sample: true` are labelled preview collections. Replace illustrations with your photographs and set `sample: false` when ready.
+- Home shows two featured projects and the three latest published posts, including non-featured posts.
+# Local Editing
+
+Run `pnpm studio` in Ubuntu WSL, then open http://localhost:5174.
+The private editor includes writing, photos, projects, profile, appearance,
+and a separate review-and-publish step. See [Studio guide](studio/README.md)
+for first-publication setup, privacy limits, and backup instructions.
+The public site includes a persistent day/night toggle and remains fully static.

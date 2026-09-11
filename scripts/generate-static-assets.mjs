@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
 
 const root = process.cwd();
 const publicDir = path.join(root, "public");
@@ -9,7 +10,7 @@ fs.mkdirSync(publicDir, { recursive: true });
 
 const projects = readMarkdownCollection("content/projects");
 const posts = readMarkdownCollection("content/blog")
-  .filter((post) => post.data.draft !== "true")
+  .filter((post) => post.data.draft !== true)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 const albums = readJsonCollection("content/albums");
 
@@ -103,24 +104,7 @@ function readJsonCollection(directory) {
     .map((file) => JSON.parse(fs.readFileSync(path.join(directoryPath, file), "utf8")));
 }
 
-function parseFrontmatter(source) {
-  if (!source.startsWith("---")) return { data: {}, content: source.trim() };
-
-  const closing = source.indexOf("\n---", 3);
-  if (closing === -1) return { data: {}, content: source.trim() };
-
-  const raw = source.slice(3, closing).trim();
-  const content = source.slice(closing + 4).trim();
-  const data = {};
-
-  for (const line of raw.split("\n")) {
-    const index = line.indexOf(":");
-    if (index === -1) continue;
-    data[line.slice(0, index).trim()] = line.slice(index + 1).trim().replace(/^["']|["']$/g, "");
-  }
-
-  return { data, content };
-}
+function parseFrontmatter(source) { return matter(source); }
 
 function summarize(markdown) {
   return markdown

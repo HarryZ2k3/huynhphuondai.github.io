@@ -1,54 +1,26 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Rss } from "lucide-react";
 import { getPosts } from "@/lib/content";
+import { WritingIndex } from "@/components/WritingIndex";
+import { absoluteUrl, assetPath } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Writing",
-  description: "Practical notes, field reflections, and blog posts from Harry Huynh.",
+  description: "Technical notes, essays, and journal entries from Harry Huynh.",
+  alternates: { canonical: absoluteUrl("/writing/") },
 };
 
 export default function WritingPage() {
-  const posts = getPosts();
-
+  const posts = getPosts().map(({ slug, title, date, description, readingTime, category, section }) => ({ slug, title, date, description, readingTime, category, section }));
   return (
     <>
-      <section className="page-hero section-shell reveal">
+      <section className="page-hero section-shell writing-hero">
         <p className="section-kicker">Writing</p>
-        <h1>Blog posts for things worth remembering after the ticket is closed.</h1>
-        <p>
-          Use this tab for troubleshooting notes, lessons learned, field reflections, and personal essays. Every post is
-          a Markdown file in the repository.
-        </p>
+        <h1>A notebook, kept open.</h1>
+        <p>What I learn at work, what I notice outside it, and the ideas that stay with me.</p>
+        <a className="text-link" href={assetPath("/rss.xml")}><Rss size={16} aria-hidden="true" /> Follow via RSS</a>
       </section>
-
-      <section className="section-shell section-block">
-        <div className="writing-index">
-          {posts.map((post) => (
-            <Link className="writing-entry reveal" href={`/writing/${post.slug}`} key={post.slug}>
-              <div>
-                <span>
-                  {post.category} · {formatDate(post.date)} · {post.readingTime} min read
-                </span>
-                <h2>{post.title}</h2>
-                <p>{post.description}</p>
-              </div>
-              <ul className="tag-list" aria-label={`${post.title} tags`}>
-                {post.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <section className="section-shell writing-index" aria-labelledby="writing-archive"><h2 className="sr-only" id="writing-archive">Writing archive</h2><WritingIndex posts={posts} /></section>
     </>
   );
-}
-
-function formatDate(value: string): string {
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date(value));
 }

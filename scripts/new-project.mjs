@@ -18,8 +18,9 @@ if (fs.existsSync(filePath)) {
 }
 
 const source = `---
-title: ${title}
-year: ${year}
+title: ${JSON.stringify(title)}
+year: "${year}"
+kind: Personal project
 role: Information Technology Engineer
 description: One clear sentence about the project and its result.
 technologies: [Documentation]

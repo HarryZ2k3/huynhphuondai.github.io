@@ -1,10 +1,11 @@
 ---
-title: A Practical Troubleshooting Checklist
-description: A calm sequence I like using before jumping into complex fixes.
-date: 2026-08-17
-updated: 2026-08-17
+title: "A Practical Troubleshooting Checklist"
+description: "A calm sequence I like using before jumping into complex fixes."
+date: "2026-08-17"
+updated: "2026-08-17"
 tags: [Troubleshooting, IT support, Notes]
-category: Field Notes
+category: "Field Notes"
+section: "Technical"
 draft: false
 featured: true
 ---

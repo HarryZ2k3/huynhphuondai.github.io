@@ -1,11 +1,11 @@
 {
   "title": "Learning Archive",
   "slug": "learning-archive",
-  "description": "A flexible album for screenshots, lab photos, certification notes, and study memories.",
+  "description": "Objects, pages, and traces of things learned.",
   "date": "2026-07-30",
   "location": "Personal archive",
   "coverImage": "/images/albums/archive-01.svg",
-  "story": "This album is for the quieter side of professional growth. Add the photos that show what you are learning and how your taste is developing over time.",
+  "story": "Objects, pages, and traces of things learned. This preview collection uses illustrations while the photographs are being gathered.",
   "photos": [
     {
       "src": "/images/albums/archive-01.svg",
@@ -21,5 +21,6 @@
       "width": 1600,
       "height": 1100
     }
-  ]
+  ],
+  "sample": true
 }

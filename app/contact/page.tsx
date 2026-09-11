@@ -1,30 +1,26 @@
 import type { Metadata } from "next";
+import { ArrowUpRight, Mail } from "lucide-react";
 import { getProfile } from "@/lib/content";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact Harry Huynh.",
+  description: "Get in touch with Harry Huynh.",
+  alternates: { canonical: absoluteUrl("/contact/") },
 };
 
 export default function ContactPage() {
   const profile = getProfile();
-
   return (
-    <section className="page-hero section-shell reveal">
+    <section className="page-hero section-shell contact-page">
       <p className="section-kicker">Contact</p>
-      <h1>Reach out directly.</h1>
-      <p>
-        The site has no login, no hidden admin area, and no database. For now, contact stays simple and durable: direct
-        links that work anywhere this static site is hosted.
-      </p>
+      <h1>Let&apos;s talk.</h1>
+      <p>Have an opportunity, a project, or a thought about something I wrote? I would be glad to hear from you.</p>
+      <a className="contact-email" href={`mailto:${profile.email}`}><Mail size={24} aria-hidden="true" /><span>{profile.email}</span><ArrowUpRight size={24} aria-hidden="true" /></a>
       <div className="contact-links">
-        <a href={`mailto:${profile.email}`}>{profile.email}</a>
-        {profile.socials.map((social) => (
-          <a href={social.href} key={social.href} rel="noreferrer" target="_blank">
-            {social.label}
-          </a>
-        ))}
+        {profile.socials.filter((social) => !social.href.startsWith("mailto:")).map((social) => <a className="text-link" href={social.href} key={social.href} rel="noreferrer" target="_blank">{social.label}<ArrowUpRight size={17} aria-hidden="true" /></a>)}
       </div>
+      <p className="location-note">{profile.location}</p>
     </section>
   );
 }

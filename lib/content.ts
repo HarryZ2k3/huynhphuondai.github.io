@@ -1,14 +1,24 @@
 import fs from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
+import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
+import { assetPath } from "./site";
 
 const contentRoot = path.join(process.cwd(), "content");
 
 export type Profile = {
   name: string;
+  fullName?: string;
+  personalNote?: string;
+  education?: Array<{ institution: string; qualification: string; dates: string; detail: string }>;
+  languages?: string[];
+  qualifications?: string[];
   title: string;
   location: string;
   email: string;
   portraitImage: string;
+  resumeFile?: string;
   currentFocus: string;
   hero: {
     headline: string;
@@ -33,6 +43,9 @@ export type Experience = {
 };
 
 export type Project = {
+  kind?: string;
+  organization?: string;
+  period?: string;
   title: string;
   slug: string;
   year: string;
@@ -52,6 +65,7 @@ export type Project = {
 };
 
 export type Post = {
+  section?: "Technical" | "Essays" | "Journal";
   title: string;
   slug: string;
   description: string;
@@ -67,6 +81,7 @@ export type Post = {
 };
 
 export type Album = {
+  sample?: boolean;
   title: string;
   slug: string;
   description: string;
@@ -117,106 +132,23 @@ export function getAlbum(slug: string): Album | undefined {
   return getAlbums().find((album) => album.slug === slug);
 }
 
+export function getAppearance() {
+  const defaults = { accent: "green", showWork: true, showWriting: true, showPersonal: true };
+  const file = path.join(contentRoot, "appearance.json");
+  return fs.existsSync(file) ? { ...defaults, ...JSON.parse(fs.readFileSync(file, "utf8")) } as typeof defaults : defaults;
+}
+
 export function markdownToHtml(markdown: string): string {
-  const lines = markdown.replace(/\r\n/g, "\n").split("\n");
-  const html: string[] = [];
-  let paragraph: string[] = [];
-  let listType: "ul" | "ol" | null = null;
-  let inCode = false;
-  let codeLanguage = "";
-  let codeLines: string[] = [];
-
-  const closeParagraph = () => {
-    if (!paragraph.length) return;
-    html.push(`<p>${inlineMarkdown(paragraph.join(" "))}</p>`);
-    paragraph = [];
-  };
-
-  const closeList = () => {
-    if (!listType) return;
-    html.push(`</${listType}>`);
-    listType = null;
-  };
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-
-    if (trimmed.startsWith("```")) {
-      if (inCode) {
-        html.push(
-          `<pre class="code-block"><code data-language="${escapeHtml(codeLanguage)}">${escapeHtml(codeLines.join("\n"))}</code></pre>`,
-        );
-        inCode = false;
-        codeLanguage = "";
-        codeLines = [];
-      } else {
-        closeParagraph();
-        closeList();
-        inCode = true;
-        codeLanguage = trimmed.slice(3).trim();
-      }
-      continue;
-    }
-
-    if (inCode) {
-      codeLines.push(line);
-      continue;
-    }
-
-    if (!trimmed) {
-      closeParagraph();
-      closeList();
-      continue;
-    }
-
-    const heading = trimmed.match(/^(#{2,4})\s+(.+)$/);
-    if (heading) {
-      closeParagraph();
-      closeList();
-      const level = heading[1].length;
-      html.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
-      continue;
-    }
-
-    if (trimmed.startsWith("> ")) {
-      closeParagraph();
-      closeList();
-      html.push(`<blockquote>${inlineMarkdown(trimmed.slice(2))}</blockquote>`);
-      continue;
-    }
-
-    const unordered = trimmed.match(/^[-*]\s+(.+)$/);
-    if (unordered) {
-      closeParagraph();
-      if (listType !== "ul") {
-        closeList();
-        html.push("<ul>");
-        listType = "ul";
-      }
-      html.push(`<li>${inlineMarkdown(unordered[1])}</li>`);
-      continue;
-    }
-
-    const ordered = trimmed.match(/^\d+\.\s+(.+)$/);
-    if (ordered) {
-      closeParagraph();
-      if (listType !== "ol") {
-        closeList();
-        html.push("<ol>");
-        listType = "ol";
-      }
-      html.push(`<li>${inlineMarkdown(ordered[1])}</li>`);
-      continue;
-    }
-
-    closeList();
-    paragraph.push(trimmed);
-  }
-
-  closeParagraph();
-  closeList();
-
-  return html.join("\n");
+  return sanitizeHtml(marked.parse(markdown, { async: false }), {
+    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "del"],
+    allowedAttributes: { a: ["href", "title"], img: ["src", "alt", "title", "loading"], code: ["class"] },
+    allowedSchemes: ["https", "http", "mailto"],
+    allowProtocolRelative: false,
+    transformTags: {
+      img: (_tag, attributes) => ({ tagName: "img", attribs: { ...attributes, src: attributes.src?.startsWith("/") && !attributes.src.startsWith("//") ? assetPath(attributes.src) : attributes.src, loading: "lazy" } }),
+      a: (_tag, attributes) => ({ tagName: "a", attribs: { ...attributes, href: attributes.href?.startsWith("/") && !attributes.href.startsWith("//") ? assetPath(attributes.href) : attributes.href } }),
+    },
+  });
 }
 
 function readCollection<T extends { slug: string; content: string }>(directory: string): T[] {
@@ -251,55 +183,8 @@ function readJson<T>(relativePath: string): T {
   return JSON.parse(fs.readFileSync(path.join(contentRoot, relativePath), "utf8")) as T;
 }
 
-function parseFrontmatter(source: string): { data: Record<string, unknown>; content: string } {
-  if (!source.startsWith("---")) return { data: {}, content: source.trim() };
-
-  const closing = source.indexOf("\n---", 3);
-  if (closing === -1) return { data: {}, content: source.trim() };
-
-  const raw = source.slice(3, closing).trim();
-  const content = source.slice(closing + 4).trim();
-  const data: Record<string, unknown> = {};
-
-  raw.split("\n").forEach((line) => {
-    const index = line.indexOf(":");
-    if (index === -1) return;
-    const key = line.slice(0, index).trim();
-    const value = line.slice(index + 1).trim();
-    data[key] = parseValue(value);
-  });
-
-  return { data, content };
-}
-
-function parseValue(value: string): unknown {
-  if (value === "true") return true;
-  if (value === "false") return false;
-  if (value.startsWith("[") && value.endsWith("]")) {
-    return value
-      .slice(1, -1)
-      .split(",")
-      .map((item) => item.trim().replace(/^["']|["']$/g, ""))
-      .filter(Boolean);
-  }
-  return value.replace(/^["']|["']$/g, "");
-}
-
-function inlineMarkdown(value: string): string {
-  return escapeHtml(value)
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" />')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*([^*]+)\*/g, "<em>$1</em>");
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+function parseFrontmatter(source: string) {
+  return matter(source);
 }
 
 function estimateReadingTime(markdown: string): number {

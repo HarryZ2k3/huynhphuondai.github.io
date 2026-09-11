@@ -29,11 +29,23 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://harryz2k3.github.io/Personal-Porfolio/work/database-design-documentation/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://harryz2k3.github.io/Personal-Porfolio/work/endpoint-lifecycle/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://harryz2k3.github.io/Personal-Porfolio/work/ilp-research-tooling/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://harryz2k3.github.io/Personal-Porfolio/work/reliable-office-network/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://harryz2k3.github.io/Personal-Porfolio/work/student-records-platform/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
