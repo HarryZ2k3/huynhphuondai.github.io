@@ -1,6 +1,6 @@
 export const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? "");
 export const siteUrl = normalizeSiteUrl(
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://harryz2k3.github.io/Personal-Porfolio",
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://harryz2k3.github.io/huynhphuondai.github.io",
 );
 
 export function assetPath(path: string): string {

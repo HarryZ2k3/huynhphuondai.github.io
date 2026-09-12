@@ -74,7 +74,7 @@ This repo already includes `.github/workflows/pages.yml`. After GitHub Pages is 
 For this repository, the public URL should be:
 
 ```text
-https://harryz2k3.github.io/Personal-Porfolio/
+https://harryz2k3.github.io/huynhphuondai.github.io/
 ```
 
 ### Publishing Updates

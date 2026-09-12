@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 const root = process.cwd();
 const publicDir = path.join(root, "public");
-const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL ?? "https://harryz2k3.github.io/Personal-Porfolio");
+const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL ?? "https://harryz2k3.github.io/huynhphuondai.github.io");
 
 fs.mkdirSync(publicDir, { recursive: true });
 
