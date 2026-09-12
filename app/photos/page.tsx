@@ -22,7 +22,7 @@ export default function PhotosPage() {
         {albums.every((album) => album.sample) ? <p className="collection-note">The first photographs are still to come. These preview collections contain illustrations.</p> : null}
         <div className="album-grid">
           {albums.map((album) => (
-            <article className="album-card" key={album.slug}>
+            <article className="album-card reveal" key={album.slug}>
               <Link className="album-image" href={`/photos/${album.slug}`} tabIndex={-1} aria-hidden="true"><img src={assetPath(album.coverImage)} alt="" width={1600} height={1100} loading="lazy" /></Link>
               <p className="entry-meta">{album.sample ? "Preview collection" : album.location} / {formatDate(album.date)}</p>
               <h2><Link href={`/photos/${album.slug}`}>{album.title}<ArrowUpRight size={20} aria-hidden="true" /></Link></h2>

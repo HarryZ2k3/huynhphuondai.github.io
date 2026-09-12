@@ -16,7 +16,7 @@
     "preview": "node scripts/serve-static.mjs out 5173 127.0.0.1",
     "start": "pnpm run host",
     "typecheck": "tsc --noEmit",
-    "test": "pnpm run build && node --test tests/static-site.test.mjs",
+    "test": "pnpm run build && node --test tests/static-site.test.mjs tests/motion.test.mjs",
     "lint": "eslint app components lib scripts tests studio/*.mjs studio/*.jsx next.config.ts eslint.config.mjs",
     "new-post": "node scripts/new-post.mjs",
     "new-project": "node scripts/new-project.mjs",

@@ -263,10 +263,10 @@ code { font-family: ui-monospace, Consolas, monospace; font-size: .85em; backgro
 .footer-grid nav { display: flex; flex-wrap: wrap; gap: 22px; }
 .footer-grid nav a { display: flex; align-items: center; gap: 5px; font-size: 12px; min-height: 44px; color: var(--muted); }
 .footer-grid nav a:hover { color: var(--accent); }
-.reveal { opacity: 1; transform: none; transition: opacity 360ms ease, transform 360ms ease; }
-.reveal-pending { opacity: 0; transform: translateY(12px); }
-.reveal:focus-within { opacity: 1; transform: none; }
-.page-transition { animation: page-enter 220ms ease-out; }
+.reveal { opacity: 1; transform: none; transition: opacity 560ms ease, transform 560ms cubic-bezier(.22,1,.36,1); transition-delay: var(--reveal-delay, 0ms); }
+.reveal-pending { opacity: 0; transform: translateY(20px); transition: none; }
+.reveal:focus-within { opacity: 1; transform: none; transition: none; }
+.page-transition { animation: page-enter 320ms ease-out; }
 @keyframes page-enter {
   from { opacity: .3; transform: translateY(5px); }
   to { opacity: 1; transform: none; }

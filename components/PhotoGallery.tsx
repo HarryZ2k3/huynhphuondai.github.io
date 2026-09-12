@@ -21,7 +21,7 @@ export function PhotoGallery({ photos }: { photos: Album["photos"] }) {
     <>
       <div className="photo-wall">
         {photos.map((item, index) => (
-          <figure className="photo-tile" key={item.src}>
+          <figure className="photo-tile reveal" key={item.src}>
             <button type="button" className="photo-open" aria-label={`Enlarge ${item.caption || item.alt}`} onClick={(event) => {
               opener.current = event.currentTarget;
               setActive(index);

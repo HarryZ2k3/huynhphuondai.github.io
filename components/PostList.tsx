@@ -9,7 +9,7 @@ export function PostList({ posts }: { posts: PostSummary[] }) {
   return (
     <div className="post-list">
       {posts.map((post) => (
-        <article className="post-entry" key={post.slug}>
+        <article className="post-entry reveal" key={post.slug}>
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <div>
             <p className="entry-meta">{post.section ?? "Technical"}<span aria-hidden="true"> / </span>{post.readingTime} min read</p>

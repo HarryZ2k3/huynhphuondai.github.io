@@ -26,7 +26,7 @@ export default function HomePage() {
       </section>
 
       {appearance.showWork && <section className="section-shell section-block ruled-section" aria-labelledby="selected-work">
-        <div className="section-heading">
+        <div className="section-heading reveal">
           <div><p className="section-kicker">01 / Work</p><h2 id="selected-work">Selected work</h2></div>
           <Link className="text-link" href="/work">All projects <ArrowRight size={17} aria-hidden="true" /></Link>
         </div>
@@ -35,7 +35,7 @@ export default function HomePage() {
 
       {appearance.showWriting && <section className="writing-band">
         <div className="section-shell section-block home-writing">
-          <div className="section-heading">
+          <div className="section-heading reveal">
             <div><p className="section-kicker">02 / Writing</p><h2>From the notebook</h2><p className="section-description">Technical notes, personal reflections, and things I want to remember.</p></div>
             <Link className="text-link" href="/writing">All writing <ArrowRight size={17} aria-hidden="true" /></Link>
           </div>
@@ -44,15 +44,15 @@ export default function HomePage() {
       </section>}
 
       {appearance.showPersonal && <section className="section-shell section-block personal-section">
-        <div><p className="section-kicker">03 / Beyond the work</p><h2>A little more personal.</h2></div>
-        <div className="personal-copy">
+        <div className="reveal"><p className="section-kicker">03 / Beyond the work</p><h2>A little more personal.</h2></div>
+        <div className="personal-copy reveal">
           <p>{profile.personalNote ?? profile.biography[profile.biography.length - 1]}</p>
           <div className="inline-links"><Link className="text-link" href="/about">About me <ArrowUpRight size={17} aria-hidden="true" /></Link><Link className="text-link" href="/photos">Photo journal <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
         </div>
       </section>}
 
       <section className="contact-band">
-        <div className="section-shell contact-grid">
+        <div className="section-shell contact-grid reveal">
           <div><p className="section-kicker">Contact</p><h2>Have something in mind?</h2><p>For opportunities, projects, or a conversation about something you read.</p></div>
           <Link className="button button-primary" href="/contact">Get in touch <ArrowUpRight size={17} aria-hidden="true" /></Link>
         </div>

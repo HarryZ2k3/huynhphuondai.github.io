@@ -59,7 +59,7 @@ jobs:
         run: pnpm run build
 
       - name: Test export
-        run: node --test tests/static-site.test.mjs
+        run: node --test tests/static-site.test.mjs tests/motion.test.mjs
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
