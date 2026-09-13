@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 import { build } from "esbuild";
+import { site } from "./site-content.mjs";
 
 const bundled = await build({
   entryPoints: ["components/MotionController.tsx"],
@@ -120,11 +121,20 @@ test("unsupported browsers leave all content visible", () => {
   assert.equal(f.first.classes.has("reveal-pending"), false);
 });
 test("exported home, about and photo pages retain scroll-reveal coverage", () => {
-  for (const [file, minimum] of [["out/index.html", 8], ["out/about/index.html", 10], ["out/photos/index.html", 3]]) {
+  const { appearance, profile, projects, posts, albums } = site;
+  const homeCount = 1 + (appearance.showWork ? 1 + Math.min(projects.filter(project => project.featured).length, 2) : 0)
+    + (appearance.showWriting ? 1 + Math.min(posts.length, 3) : 0) + (appearance.showPersonal ? 2 : 0);
+  const aboutCount = 7 + profile.experience.length
+    + (profile.education?.length ? 1 + profile.education.length : 0) + (profile.languages?.length ? 2 : 0);
+  for (const [file, expected] of [["out/index.html", homeCount], ["out/about/index.html", aboutCount], ["out/photos/index.html", albums.length]]) {
     const html = fs.readFileSync(file, "utf8");
-    assert.ok((html.match(/class="[^"]*\breveal\b[^"]*"/g) ?? []).length >= minimum, file);
+    assert.equal((html.match(/class="[^"]*\breveal\b[^"]*"/g) ?? []).length, expected, file);
     assert.ok(!html.includes("reveal-pending"), "Static HTML must start visible without JavaScript.");
   }
-  const article = fs.readFileSync("out/writing/calm-technology/index.html", "utf8");
-  assert.ok(!/class="(?:prose|reading-shell article-shell)[^"]*reveal/.test(article));
+  for (const post of posts) {
+    const article = fs.readFileSync(`out/writing/${post.slug}/index.html`, "utf8");
+    assert.match(article, /class="[^"]*\bprose\b/);
+    assert.ok(!/class="(?:prose|reading-shell article-shell)[^"]*reveal/.test(article), post.slug);
+    assert.ok(!article.includes("reveal-pending"), post.slug);
+  }
 });
