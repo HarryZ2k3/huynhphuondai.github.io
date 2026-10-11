@@ -17,6 +17,7 @@ export function readSiteContent(root = process.cwd()) {
   const articles = collection("blog", ".md");
   return {
     profile: json("profile.json"),
+    settings: fs.existsSync(path.join(directory, "site.json")) ? json("site.json") : null,
     appearance: {
       showWork: true, showWriting: true, showPersonal: true,
       ...(fs.existsSync(path.join(directory, "appearance.json")) ? json("appearance.json") : {}),

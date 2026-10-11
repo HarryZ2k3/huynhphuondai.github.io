@@ -4,6 +4,8 @@ import matter from "gray-matter";
 
 const root = process.cwd();
 const publicDir = path.join(root, "public");
+const profile = JSON.parse(fs.readFileSync(path.join(root, "content/profile.json"), "utf8"));
+const settings = JSON.parse(fs.readFileSync(path.join(root, "content/site.json"), "utf8"));
 const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL ?? "https://harryz2k3.github.io/huynhphuondai.github.io");
 
 fs.mkdirSync(publicDir, { recursive: true });
@@ -67,9 +69,9 @@ function buildRss(items) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-  <title>Harry Huynh Writing</title>
+  <title>${escapeXml(profile.name)} ${escapeXml(settings.navigation.writing)}</title>
   <link>${escapeXml(siteUrl)}</link>
-  <description>Practical notes, field reflections, and personal writing.</description>
+  <description>${escapeXml(settings.writing.description)}</description>
 ${entries}
 </channel>
 </rss>

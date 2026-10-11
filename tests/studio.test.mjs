@@ -5,7 +5,8 @@ import os from "node:os";
 import path from "node:path";
 import sharp from "sharp";
 import matter from "gray-matter";
-import { ContentStore, safeFile, safeTarget, serialize } from "../studio/content-store.mjs";
+import { ContentStore, safeFile, safeTarget, serialize, validate } from "../studio/content-store.mjs";
+import { normalizeSettings } from "../studio/settings.mjs";
 
 function fixture(t) {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), "studio-test-"));
@@ -53,7 +54,7 @@ test("rejects stale windows and outside edits without losing draft", t => {
 test("review requires ready posts and publishes only selected referenced media", async t => {
   const { store, temp } = fixture(t);
   store.save({ id, value, revision: 0, base: null });
-  assert.throws(() => store.review([id]), /ready/);
+  assert.throws(() => store.review([id]), /Ready for publication/);
   assert.equal(store.review([id], true).drafts[0].value.draft, false);
   assert.equal(store.state.drafts[id].value.draft, true);
   const bytes = await sharp({ create: { width: 10, height: 10, channels: 3, background: "#216958" } }).png().toBuffer();
@@ -85,4 +86,50 @@ test("unpublish removes only the selected page from a snapshot", t => {
   store.overlay(snapshot, store.review([id]));
   assert.equal(fs.existsSync(path.join(snapshot, id)), false);
   assert.equal(fs.existsSync(path.join(repo, id)), true);
+});
+
+test("page settings save privately, validate, and appear only in selected previews", t => {
+  const { store, temp, repo } = fixture(t);
+  const settingsId = "content/site.json";
+  const settings = JSON.parse(fs.readFileSync("content/site.json", "utf8"));
+  settings.home.workHeading = "My selected work";
+  store.save({ id: settingsId, value: settings, revision: 0, base: null });
+  assert.equal(fs.existsSync(path.join(repo, settingsId)), false);
+  const snapshot = path.join(temp, "preview");
+  fs.mkdirSync(snapshot);
+  store.overlay(snapshot, store.review([settingsId], true));
+  assert.equal(JSON.parse(fs.readFileSync(path.join(snapshot, settingsId))).home.workHeading, "My selected work");
+  assert.throws(() => validate(settingsId, { ...settings, navigation: { ...settings.navigation, home: "" } }), /Navigation/);
+  assert.throws(() => validate(settingsId, { ...settings, footer: { ...settings.footer, showRss: "yes" } }), /on or off/);
+  assert.throws(() => validate(settingsId, { ...settings, seo: { ...settings.seo, socialImage: "javascript:alert(1)" } }), /uploaded/);
+  assert.throws(() => store.save({ id: settingsId, value: settings, revision: store.state.revision, base: null, operation: "unpublish" }), /cannot be unpublished/);
+});
+
+test("older settings receive non-destructive CV and appearance defaults", () => {
+  const original = { name: "Writer", resumeFile: "/files/existing.pdf", hero: { headline: "Hello", summary: "About me" } };
+  const normalized = normalizeSettings("content/profile.json", original);
+  assert.equal(normalized.resumeFile, original.resumeFile);
+  assert.equal(normalized.showResume, true);
+  assert.deepEqual(normalized.education, []);
+  assert.equal("showResume" in original, false);
+  const appearance = normalizeSettings("content/appearance.json", { accent: "rose", showWork: false });
+  assert.equal(appearance.animations, true);
+  assert.equal(appearance.showWork, false);
+  assert.throws(() => validate("content/appearance.json", { ...appearance, readingSize: "huge" }), /reading size/);
+  assert.throws(() => validate("content/appearance.json", { ...appearance, animations: "yes" }), /on or off/);
+});
+
+test("CV updates preserve privacy and keep unrelated private uploads out of publication", async t => {
+  const { store, repo } = fixture(t);
+  const profile = normalizeSettings("content/profile.json", JSON.parse(fs.readFileSync("content/profile.json", "utf8")));
+  const pdf = await store.upload("cv.pdf", Buffer.from("%PDF-1.4\nTest fixture"));
+  await store.upload("private.pdf", Buffer.from("%PDF-1.4\nNot selected"));
+  profile.resumeFile = pdf.src;
+  profile.aboutSummary = "An updated introduction";
+  store.save({ id: "content/profile.json", value: profile, revision: store.state.revision, base: null });
+  const review = store.review(["content/profile.json"]);
+  assert.deepEqual(review.media.map(m => m.filename), [pdf.filename]);
+  assert.equal(fs.existsSync(path.join(repo, "public")), false);
+  assert.throws(() => validate("content/profile.json", { ...profile, resumeFile: "/images/photo.webp" }), /PDF/);
+  assert.throws(() => validate("content/profile.json", { ...profile, showResume: "false" }), /on or off/);
 });

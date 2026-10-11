@@ -3,9 +3,10 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-export function MotionController() {
+export function MotionController({ enabled = true }: { enabled?: boolean } = {}) {
   const pathname = usePathname();
   useEffect(() => {
+    if (!enabled) return;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const root = document.getElementById("main-content");
     if (!root || !("IntersectionObserver" in window)) return;
@@ -83,6 +84,6 @@ export function MotionController() {
       preference.removeEventListener("change", start);
       reset();
     };
-  }, [pathname]);
+  }, [pathname, enabled]);
   return null;
 }

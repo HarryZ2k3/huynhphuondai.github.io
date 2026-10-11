@@ -166,6 +166,11 @@ const server = http.createServer(async (request, response) => {
     if (request.method !== "GET") { response.writeHead(405); return response.end(); }
     if (pathname === "/api/state") return json({ items: store.list(), media: store.state.media, revision: store.state.revision, job, busy, privateDirectory: store.root });
     if (pathname === "/api/job") return json({ ...job, busy });
+    if (pathname === "/api/guide") {
+      response.setHeader("Content-Type", "text/markdown; charset=utf-8");
+      response.setHeader("Content-Disposition", 'attachment; filename="Portfolio-Studio-Quick-Guide.md"');
+      return response.end(fs.readFileSync(path.join(directory, "QUICKSTART.md"), "utf8"));
+    }
     if (pathname === "/api/backup") { response.setHeader("Content-Disposition", 'attachment; filename="portfolio-private-backup.json"'); return json(store.backup()); }
     if (pathname.startsWith("/media/")) return sendFile(response, path.join(store.root, "media"), pathname.slice(7));
     if (pathname.startsWith("/images/") || pathname.startsWith("/files/")) {

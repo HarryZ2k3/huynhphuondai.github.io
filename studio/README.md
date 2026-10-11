@@ -34,11 +34,21 @@ Do not forward their ports or expose either development server to the internet.
 4. Save, then Preview. This builds an isolated copy of the actual website,
    including the current entry (or selected entries on Overview), outside Git.
    Open preview when the build completes. Other local drafts are not included.
-5. For an article you intend to publish, uncheck "Keep as private draft".
+5. For an article you intend to publish, check "Ready for publication".
    Review & publish lists the exact files, then requires a separate confirmation.
    A new upload becomes public only when referenced by selected content.
 6. After pushing, check the linked GitHub Actions deployment. "Commit pushed"
    does NOT mean the website is live yet.
+
+## Expanded Editing
+
+The Overview shortcuts open **Edit introduction**, **Update CV**, and **Edit page text**.
+Profile is grouped into Introduction, CV & career, and Contact & links. CV controls
+replace a PDF, change its button label, or hide the link; they do not edit the PDF.
+Page text covers navigation labels, page headings, descriptions, footer, and sharing
+metadata. Appearance includes heading typography, reading size, and animations.
+The book icon downloads [the short workflow guide](QUICKSTART.md).
+Edits remain private drafts until explicitly reviewed and published.
 
 ## First publication
 

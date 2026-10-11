@@ -3,31 +3,37 @@ import { MotionController } from "@/components/MotionController";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { assetPath, siteUrl } from "@/lib/site";
-import { getAppearance, getProfile } from "@/lib/content";
+import { getAppearance, getProfile, getSiteSettings } from "@/lib/content";
 import "./globals.css";
 
 const profile = getProfile();
+const settings = getSiteSettings();
+const appearance = getAppearance();
+const siteTitle = `${profile.name} | ${settings.seo.titleSuffix}`;
+const description = settings.seo.description || profile.hero.summary;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${profile.name} | IT Engineer & Writer`,
+    default: siteTitle,
     template: `%s | ${profile.name}`,
   },
   description:
-    profile.hero.summary,
+    description,
   openGraph: {
-    title: "Harry Huynh | Personal Website",
+    title: siteTitle,
     description:
-      profile.hero.summary,
+      description,
+    ...(settings.seo.socialImage ? { images: [assetPath(settings.seo.socialImage)] } : {}),
     type: "website",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Harry Huynh | Personal Website",
+    title: siteTitle,
     description:
-      profile.hero.summary,
+      description,
+    ...(settings.seo.socialImage ? { images: [assetPath(settings.seo.socialImage)] } : {}),
   },
   icons: {
     icon: assetPath("/favicon.svg"),
@@ -41,12 +47,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-accent={getAppearance().accent} suppressHydrationWarning>
+    <html lang="en" data-accent={appearance.accent} data-motion={appearance.animations ? "on" : "off"} data-heading-font={appearance.headingFont} data-reading-size={appearance.readingSize} suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('portfolio-theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch(e){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}` }} /></head>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
-        <MotionController />
-        <SiteHeader name={profile.name} />
+        <MotionController enabled={appearance.animations} />
+        <SiteHeader name={profile.name} labels={settings.navigation} />
         <main id="main-content" tabIndex={-1}>{children}</main>
         <SiteFooter />
       </body>

@@ -4,10 +4,11 @@ import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import matter from "gray-matter";
 import sharp from "sharp";
+import { normalizeSettings, validateSettings } from "./settings.mjs";
 
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
 export function safeTarget(id) {
-  if (!/^(content\/(blog|projects)\/[a-z0-9][a-z0-9-]*\.md|content\/albums\/[a-z0-9][a-z0-9-]*\.json|content\/(profile|appearance)\.json)$/.test(id)) throw new Error("Invalid content path.");
+  if (!/^(content\/(blog|projects)\/[a-z0-9][a-z0-9-]*\.md|content\/albums\/[a-z0-9][a-z0-9-]*\.json|content\/(profile|appearance|site)\.json)$/.test(id)) throw new Error("Invalid content path.");
   return id;
 }
 export function safeFile(root, relative) {
@@ -32,6 +33,7 @@ export function validate(id, value, publishing = false) {
   safeTarget(id);
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Content must be an object.");
   if (JSON.stringify(value).length > 1000000) throw new Error("This entry exceeds the 1 MB text limit.");
+  validateSettings(id, value);
   const collection = id.split("/")[1];
   if (["blog", "projects", "albums"].includes(collection)) {
     if (typeof value.title !== "string" || !value.title.trim()) throw new Error("A title is required.");
@@ -43,7 +45,7 @@ export function validate(id, value, publishing = false) {
   if (collection === "blog") {
     if (!["Technical", "Essays", "Journal"].includes(value.section)) throw new Error("Choose a writing section.");
     if (!Array.isArray(value.tags) || typeof value.body !== "string") throw new Error("Invalid article content.");
-    if (publishing && value.draft) throw new Error("Mark the article ready for publication first.");
+    if (publishing && value.draft) throw new Error('Check "Ready for publication" in the article settings, then review again.');
   }
   if (collection === "projects") {
     for (const key of ["technologies", "screenshots"]) if (!Array.isArray(value[key])) throw new Error(key + " must be a list.");
@@ -66,7 +68,7 @@ export function validate(id, value, publishing = false) {
     if (!object || typeof object !== "object") return;
     for (const [key, val] of Object.entries(object)) {
       if (["href", "repository", "demo"].includes(key) && val && !/^https:\/\//i.test(val) && !(key === "href" && /^mailto:[^\s@]+@[^\s@]+$/i.test(val))) throw new Error("Use an https:// link or a valid mailto: email link.");
-      if (["src", "coverImage", "portraitImage", "resumeFile"].includes(key) && val && (!/^\/(images|files)\/[a-zA-Z0-9_./-]+$/.test(val) || val.split("/").includes(".."))) throw new Error("Use an uploaded image or a local public file.");
+      if (["src", "coverImage", "portraitImage", "resumeFile", "socialImage"].includes(key) && val && (!/^\/(images|files)\/[a-zA-Z0-9_./-]+$/.test(val) || val.split("/").includes(".."))) throw new Error("Use an uploaded image or a local public file.");
       if (typeof val === "object") checkLinks(val);
     }
   }
@@ -98,7 +100,7 @@ export class ContentStore {
     return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
   }
   list() {
-    const ids = ["content/profile.json", "content/appearance.json"];
+    const ids = ["content/profile.json", "content/appearance.json", "content/site.json"];
     for (const [dir, ext] of [["blog", ".md"], ["projects", ".md"], ["albums", ".json"]]) {
       const folder = safeFile(this.repo, "content/" + dir);
       if (fs.existsSync(folder)) for (const file of fs.readdirSync(folder)) if (file.endsWith(ext)) ids.push("content/" + dir + "/" + file);
@@ -107,7 +109,7 @@ export class ContentStore {
       const source = this.source(id);
       const draft = this.state.drafts[id];
       if (!source && !draft) return [];
-      return [{ id, value: draft?.value ?? parse(id, source), base: source === null ? null : hash(source), draft: !!draft, published: source !== null, operation: draft?.operation ?? "save", conflict: !!draft && draft.base !== (source === null ? null : hash(source)), updated: draft?.updated }];
+      return [{ id, value: normalizeSettings(id, draft?.value ?? parse(id, source)), base: source === null ? null : hash(source), draft: !!draft, published: source !== null, operation: draft?.operation ?? "save", conflict: !!draft && draft.base !== (source === null ? null : hash(source)), updated: draft?.updated }];
     });
   }
   save({ id, value, base, revision, operation = "save" }) {

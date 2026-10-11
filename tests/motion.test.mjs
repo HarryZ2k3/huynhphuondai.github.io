@@ -35,7 +35,7 @@ class Element {
   addEventListener(event, handler) { this.handlers[event] = handler; }
   removeEventListener(event) { delete this.handlers[event]; }
 }
-function fixture({ reduced = false, supported = true } = {}) {
+function fixture({ reduced = false, supported = true, enabled = true } = {}) {
   const root = new Element(0); root.classes.clear();
   const visible = new Element(100, root), first = new Element(1000, root), second = new Element(1000, root), article = new Element(1300, root, true);
   root.children = [visible, first, second, article];
@@ -59,7 +59,7 @@ function fixture({ reduced = false, supported = true } = {}) {
     window: { innerHeight: 900, matchMedia: () => preference, ...(supported ? { IntersectionObserver: Intersection } : {}) },
   });
   vm.runInContext(bundled.outputFiles[0].text, context);
-  compiledModule.exports.MotionController();
+  compiledModule.exports.MotionController({ enabled });
   const cleanup = context.effect();
   return { root, visible, first, second, article, preference, observers, mutations, cleanup };
 }
@@ -117,6 +117,11 @@ test("keyboard focus reveals its target immediately and cleanup resets all style
 });
 test("unsupported browsers leave all content visible", () => {
   const f = fixture({ supported: false });
+  assert.equal(f.observers.length, 0);
+  assert.equal(f.first.classes.has("reveal-pending"), false);
+});
+test("Studio can disable animations without hiding content", () => {
+  const f = fixture({ enabled: false });
   assert.equal(f.observers.length, 0);
   assert.equal(f.first.classes.has("reveal-pending"), false);
 });

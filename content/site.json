@@ -1,0 +1,11 @@
+{
+  "navigation": { "home": "Home", "work": "Work", "writing": "Writing", "photos": "Photos", "about": "About", "contact": "Get in touch" },
+  "home": { "workHeading": "Selected work", "writingHeading": "From the notebook", "writingDescription": "Technical notes, personal reflections, and things I want to remember.", "personalHeading": "A little more personal.", "contactHeading": "Have something in mind?", "contactDescription": "For opportunities, projects, or a conversation about something you read.", "workButton": "View work", "writingButton": "Read my writing", "focusLabel": "Currently exploring" },
+  "work": { "heading": "Research into practice.", "description": "Full-stack development, logic-based AI, and database work. A closer look at my contributions, from an R&D internship to university team projects.", "experienceHeading": "Experience & academic projects", "conceptHeading": "Concept studies", "conceptDescription": "Exploratory ideas in IT operations, separate from completed work." },
+  "writing": { "heading": "A notebook, kept open.", "description": "What I learn at work, what I notice outside it, and the ideas that stay with me." },
+  "photos": { "heading": "Looking a little closer.", "description": "Places, passing moments, and the details I want to keep.", "previewNote": "The first photographs are still to come. These preview collections contain illustrations." },
+  "about": { "backgroundHeading": "The way I work", "toolkitHeading": "Tools I work with", "experienceHeading": "Work, research & teaching", "educationHeading": "What I'm studying", "languagesHeading": "Languages", "interestsHeading": "Other interests" },
+  "contact": { "heading": "Let's talk.", "description": "Have an opportunity, a project, or a thought about something I wrote? I would be glad to hear from you." },
+  "footer": { "tagline": "Engineering, writing, and life in between.", "showSocials": true, "showRss": true },
+  "seo": { "titleSuffix": "IT Engineer & Writer", "description": "", "socialImage": "" }
+}

@@ -13,7 +13,7 @@ const navItems = [
   { href: "/about", label: "About" },
 ];
 
-export function SiteHeader({ name }: { name: string }) {
+export function SiteHeader({ name, labels }: { name: string; labels: Record<string, string> }) {
   const pathname = usePathname();
   const initials = name.split(" ").map((part) => part[0]).slice(0, 2).join("");
   return (
@@ -26,10 +26,10 @@ export function SiteHeader({ name }: { name: string }) {
         <nav className="site-nav" aria-label="Primary navigation">
           {navItems.map((item) => {
             const active = item.href === "/" ? pathname === "/" : pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return <Link aria-current={active ? "page" : undefined} href={item.href} key={item.href}>{item.label}</Link>;
+            return <Link aria-current={active ? "page" : undefined} href={item.href} key={item.href}>{labels[item.label.toLowerCase()]}</Link>;
           })}
         </nav>
-        <div className="header-tools"><Link className="header-contact text-link" href="/contact">Get in touch <ArrowUpRight size={15} aria-hidden="true" /></Link><ThemeToggle /></div>
+        <div className="header-tools"><Link className="header-contact text-link" href="/contact">{labels.contact} <ArrowUpRight size={15} aria-hidden="true" /></Link><ThemeToggle /></div>
       </div>
     </header>
   );

@@ -40,11 +40,7 @@ test("site is public and has no login gate", () => {
 
 test("navigation and personal sections are present", () => {
   const home = readOut("index.html");
-  assert.match(home, /Home/);
-  assert.match(home, /Work/);
-  assert.match(home, /Writing/);
-  assert.match(home, /Photos/);
-  assert.match(home, /About/);
+  for (const text of Object.values(site.settings.navigation)) assert.ok(home.includes(escapeHtml(text)), text);
   assert.ok(home.includes(escapeHtml(site.profile.name)), "The current profile name should appear.");
 });
 
@@ -63,6 +59,26 @@ test("generated feed and search assets exist", () => {
     assert.ok(!sitemap.includes(escapeHtml(`/writing/${draft.slug}/`) + "</loc>"), "Drafts must not enter the sitemap.");
     assert.ok(!readOut("rss.xml").includes(escapeHtml(`/writing/${draft.slug}/`) + "</link>"), "Drafts must not enter RSS.");
   }
+});
+
+test("editable page text, introduction and CV settings reach the static website", () => {
+  const home = readOut("index.html");
+  for (const section of ["work", "writing", "photos", "contact"]) {
+    const html = readOut(section + "/index.html");
+    assert.ok(html.includes(escapeHtml(site.settings[section].heading)), section + " heading");
+    assert.ok(html.includes(escapeHtml(site.settings[section].description)), section + " introduction");
+  }
+  const about = readOut("about/index.html");
+  if (site.profile.aboutHeading) assert.ok(about.includes(escapeHtml(site.profile.aboutHeading)));
+  if (site.profile.aboutSummary) assert.ok(about.includes(escapeHtml(site.profile.aboutSummary)));
+  if (site.profile.resumeFile) {
+    for (const html of [home, about]) {
+      const hasCvLink = [...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].some(match => match[1].endsWith(site.profile.resumeFile));
+      assert.equal(hasCvLink, site.profile.showResume !== false, "CV download visibility");
+    }
+  }
+  assert.ok(home.includes(escapeHtml(site.settings.footer.tagline)));
+  assert.ok(home.includes(escapeHtml(site.settings.seo.titleSuffix)));
 });
 
 test("repo-backed content files are available", () => {

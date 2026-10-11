@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { getAlbums } from "@/lib/content";
+import { getAlbums, getSiteSettings } from "@/lib/content";
 import { absoluteUrl, assetPath } from "@/lib/site";
 import { formatDate } from "@/lib/format";
 
+const settings = getSiteSettings();
+
 export const metadata: Metadata = {
-  title: "Photos",
-  description: "A photo journal of places, details, and everyday life.",
+  title: settings.navigation.photos,
+  description: settings.photos.description,
   alternates: { canonical: absoluteUrl("/photos/") },
 };
 export default function PhotosPage() {
@@ -15,11 +17,11 @@ export default function PhotosPage() {
   return (
     <>
       <section className="page-hero section-shell">
-        <p className="section-kicker">Photos</p><h1>Looking a little closer.</h1>
-        <p>Places, passing moments, and the details I want to keep.</p>
+        <p className="section-kicker">{settings.navigation.photos}</p><h1>{settings.photos.heading}</h1>
+        <p>{settings.photos.description}</p>
       </section>
       <section className="section-shell section-block ruled-section" aria-label="Photo albums">
-        {albums.every((album) => album.sample) ? <p className="collection-note">The first photographs are still to come. These preview collections contain illustrations.</p> : null}
+        {albums.length > 0 && albums.every((album) => album.sample) ? <p className="collection-note">{settings.photos.previewNote}</p> : null}
         <div className="album-grid">
           {albums.map((album) => (
             <article className="album-card reveal" key={album.slug}>

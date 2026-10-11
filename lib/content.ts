@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import { assetPath } from "./site";
+import siteDefaults from "@/content/site.json";
 
 const contentRoot = path.join(process.cwd(), "content");
 
@@ -19,6 +20,10 @@ export type Profile = {
   email: string;
   portraitImage: string;
   resumeFile?: string;
+  resumeLabel?: string;
+  showResume?: boolean;
+  aboutHeading?: string;
+  aboutSummary?: string;
   currentFocus: string;
   hero: {
     headline: string;
@@ -133,9 +138,13 @@ export function getAlbum(slug: string): Album | undefined {
 }
 
 export function getAppearance() {
-  const defaults = { accent: "green", showWork: true, showWriting: true, showPersonal: true };
+  const defaults = { accent: "green", showWork: true, showWriting: true, showPersonal: true, animations: true, headingFont: "serif", readingSize: "standard" };
   const file = path.join(contentRoot, "appearance.json");
   return fs.existsSync(file) ? { ...defaults, ...JSON.parse(fs.readFileSync(file, "utf8")) } as typeof defaults : defaults;
+}
+
+export function getSiteSettings(): typeof siteDefaults {
+  return readJson<typeof siteDefaults>("site.json");
 }
 
 export function markdownToHtml(markdown: string): string {
